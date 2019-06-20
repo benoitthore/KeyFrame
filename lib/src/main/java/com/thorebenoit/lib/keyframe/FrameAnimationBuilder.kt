@@ -55,8 +55,8 @@ class FrameAnimationBuilder<T>(val data: T) {
         frameBuilder.build()
     }
 
-    inline fun frameAfter(wait: Number, crossinline block: FrameBuilder.() -> Unit)//
-            = frame(nextPosition + wait.toFloat(), block)
+    inline fun frameWithDelay(delay: Number, crossinline block: FrameBuilder.() -> Unit)//
+            = frame(nextPosition + delay.toFloat(), block)
 
     inline fun frame(position: Number? = null, block: FrameBuilder.() -> Unit) {
         val position = position?.toFloat() ?: nextPosition

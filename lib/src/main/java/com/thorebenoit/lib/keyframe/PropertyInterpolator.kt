@@ -1,5 +1,6 @@
 package com.thorebenoit.lib.keyframe
 
+import com.thorebenoit.lib.keyframe.colors.ARGB_evaluate
 import com.thorebenoit.lib.keyframe.utils.Scale
 import com.thorebenoit.lib.keyframe.utils.f
 import com.thorebenoit.lib.keyframe.utils.i

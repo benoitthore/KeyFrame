@@ -2,7 +2,7 @@ package com.thorebenoit.lib.keyframe.colors
 
 import com.thorebenoit.lib.keyframe.utils.constrain
 
-fun ARGB_evaluate(fraction: Float, startValue: Int, endValue: Int): Int {
+internal fun ARGB_evaluate(fraction: Float, startValue: Int, endValue: Int): Int {
     val startInt = startValue
     val startA = (startInt shr 24 and 0xff) / 255.0f
     var startR = (startInt shr 16 and 0xff) / 255.0f
