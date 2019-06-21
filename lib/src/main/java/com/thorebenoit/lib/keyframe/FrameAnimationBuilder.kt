@@ -3,29 +3,7 @@ package com.thorebenoit.lib.keyframe
 import com.thorebenoit.lib.keyframe.utils.œ
 
 
-interface Normalizable {
-    val lastFrame: Float
-        get() = propertyList.flatten().maxBy { it.position }?.position ?: 0f
 
-    val propertyList: List<List<FrameProperty<*>>>
-
-    fun normalize(over: Float = 1f) {
-        val max = propertyList.maxBy {
-            it.maxBy { it.position }?.position ?: 0f
-        }
-            ?.maxBy { it.position }?.position ?: return
-
-        propertyList.forEach { property: List<FrameProperty<*>> ->
-            // it = x, y , alpha
-
-            property.forEach {
-                val newPosition = over * it.position / max
-                it.position = newPosition
-            }
-
-        }
-    }
-}
 
 class FrameAnimationBuilder<T>(val data: T) {
 
@@ -50,11 +28,12 @@ class FrameAnimationBuilder<T>(val data: T) {
         return data
     }
 
-    fun initialFrame(block: FrameBuilder.() -> Unit) {
-        val frameBuilder = FrameBuilder(-œ)
-        frameBuilder.block()
-        frameBuilder.build()
-    }
+    // TODO Should this be removed ?
+//    fun initialFrame(block: FrameBuilder.() -> Unit) {
+//        val frameBuilder = FrameBuilder(-œ)
+//        frameBuilder.block()
+//        frameBuilder.build()
+//    }
 
     inline fun frameWithDelay(delay: Number, crossinline block: FrameBuilder.() -> Unit)//
             = frame(nextPosition + delay.toFloat(), block)

@@ -30,7 +30,7 @@ fun <T> MutableList<FrameProperty<T>>.animate(fraction: Number, animator: Proper
     }
     val ratio = fraction.f
 
-    // Check performance when sorting the second time (sorting should be fine on small lists anyway)
+    // TODO Move sorting to constructor
     sortBy { it.position }
 
     // Can't start the animation yet ? Go to first position
