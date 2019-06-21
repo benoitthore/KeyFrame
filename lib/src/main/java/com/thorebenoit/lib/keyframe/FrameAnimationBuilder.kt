@@ -36,9 +36,7 @@ class FrameAnimationBuilder<T>(val data: T) {
         inline fun <reified T : Normalisable> createNormalised(
             over: Float = 1f,
             crossinline block: T.(FrameAnimationBuilder<T>) -> Unit
-        ) =
-            FrameAnimationBuilder<T>(T::class.java.newInstance()).build(block).apply { normalise(over) }
-
+        ) = create(block).apply { normalise(over) }
 
     }
 
