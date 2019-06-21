@@ -3,13 +3,13 @@ package com.thorebenoit.lib.keyframe
 import com.thorebenoit.lib.keyframe.utils.œ
 
 
-interface Normalisable {
+interface Normalizable {
     val lastFrame: Float
         get() = propertyList.flatten().maxBy { it.position }?.position ?: 0f
 
     val propertyList: List<List<FrameProperty<*>>>
 
-    fun normalise(over: Float = 1f) {
+    fun normalize(over: Float = 1f) {
         val max = propertyList.maxBy {
             it.maxBy { it.position }?.position ?: 0f
         }
@@ -36,10 +36,10 @@ class FrameAnimationBuilder<T>(val data: T) {
         inline fun <reified T> create(crossinline block: T.(FrameAnimationBuilder<T>) -> Unit) =
             FrameAnimationBuilder<T>(T::class.java.newInstance()).build(block)
 
-        inline fun <reified T : Normalisable> createNormalised(
+        inline fun <reified T : Normalizable> createNormalized(
             over: Float = 1f,
             crossinline block: T.(FrameAnimationBuilder<T>) -> Unit
-        ) = create(block).apply { normalise(over) }
+        ) = create(block).apply { normalize(over) }
 
     }
 

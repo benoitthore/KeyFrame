@@ -9,7 +9,7 @@
 //    val y: MutableList<FrameProperty<Float>> = mutableListOf(),
 //    val radius: MutableList<FrameProperty<Float>> = mutableListOf(),
 //    val color: MutableList<FrameProperty<Int>> = mutableListOf()
-//) : Normalisable {
+//) : Normalizable {
 //    override var propertyList: List<List<FrameProperty<*>>> = mutableListOf(
 //        x,
 //        y,
@@ -33,7 +33,7 @@
 //    }
 //
 //
-//    val keyFrameAnim: AlphaXY = FrameAnimationBuilder.createNormalised<AlphaXY> {
+//    val keyFrameAnim: AlphaXY = FrameAnimationBuilder.createNormalized<AlphaXY> {
 //
 //        with(it) {
 //            // Avoids it.frame on every line that uses frame
@@ -122,7 +122,7 @@
 ////
 //object ProcessingTestMain {
 //
-//    val animationData = FrameAnimationBuilder.createNormalised<AlphaXY> {
+//    val animationData = FrameAnimationBuilder.createNormalized<AlphaXY> {
 //
 //        with(it) {
 //            // Avoids it.frame on every line that uses frame

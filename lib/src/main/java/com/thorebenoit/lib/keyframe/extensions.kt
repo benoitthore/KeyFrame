@@ -3,6 +3,9 @@ package com.thorebenoit.lib.keyframe
 import com.thorebenoit.lib.keyframe.utils.Scale
 import com.thorebenoit.lib.keyframe.utils.f
 
+
+val Number.percent get() = toFloat() / 100f
+
 fun <T> MutableList<FrameProperty<T>>.normalized(over: Number = 1f): MutableList<FrameProperty<T>> {
     if (this.isEmpty()) {
         return this
