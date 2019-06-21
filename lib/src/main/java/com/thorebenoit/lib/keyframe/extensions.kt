@@ -71,7 +71,7 @@ fun <T> MutableList<FrameProperty<T>>.animate(fraction: Number, animator: Proper
     )
 }
 
-val ε = 0.00001f // Epsilon
+//val ε = 0.00001f // Epsilon
 
 data class FrameProperty<T>(
     var position: Float,

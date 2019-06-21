@@ -4,6 +4,9 @@ import com.thorebenoit.lib.keyframe.utils.œ
 
 
 interface Normalisable {
+    val lastFrame: Float
+        get() = propertyList.flatten().maxBy { it.position }?.position ?: 0f
+
     val propertyList: List<List<FrameProperty<*>>>
 
     fun normalise(over: Float = 1f) {

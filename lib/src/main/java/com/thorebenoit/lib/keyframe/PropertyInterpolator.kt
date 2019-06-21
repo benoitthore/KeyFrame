@@ -6,7 +6,7 @@ import com.thorebenoit.lib.keyframe.utils.f
 import com.thorebenoit.lib.keyframe.utils.i
 
 interface PropertyInterpolator<T> {
-    fun compute(fraction: Number, fromValue: T, toValue: T, interpolator: Interpolator = linearInterpolator): T
+    fun compute(fraction: Number, fromValue: T, toValue: T, interpolator: Interpolator): T
 }
 
 object FloatAnimator : PropertyInterpolator<Float> {
