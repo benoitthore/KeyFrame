@@ -2,7 +2,7 @@ package com.thorebenoit.lib.keyframe
 
 
 interface Normalizable {
-    val propertyList: List<List<FrameProperty<*>>>
+    val propertyList: List<MutableList<out FrameProperty<out Any>>>
 }
 
 fun Normalizable.normalize(over: Float = 1f) {

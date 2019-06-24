@@ -30,9 +30,6 @@ fun <T> MutableList<FrameProperty<T>>.animate(fraction: Number, animator: Proper
     }
     val ratio = fraction.f
 
-    // TODO Move sorting to constructor
-    sortBy { it.position }
-
     // Can't start the animation yet ? Go to first position
     val first = first()
     if (ratio < first.position) {

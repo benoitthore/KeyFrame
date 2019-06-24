@@ -3,21 +3,24 @@ package com.thorebenoit.lib.keyframe
 import com.thorebenoit.lib.keyframe.utils.œ
 
 
-
-
-class FrameAnimationBuilder<T>(val data: T) {
+class FrameAnimationBuilder<T : Normalizable>(val data: T) {
 
     var defaultInterpolator: Interpolator =
         linearInterpolator
 
     companion object {
-        inline fun <reified T> create(crossinline block: T.(FrameAnimationBuilder<T>) -> Unit) =
-            FrameAnimationBuilder<T>(T::class.java.newInstance()).build(block)
+        inline fun <reified T : Normalizable> create(crossinline block: T.(FrameAnimationBuilder<T>) -> Unit) =
+            FrameAnimationBuilder<T>(T::class.java.newInstance())
+                .build(block)
+                .apply {
+                    propertyList.forEach { it.sortBy { it.position } }
+                }
 
         inline fun <reified T : Normalizable> createNormalized(
             over: Float = 1f,
             crossinline block: T.(FrameAnimationBuilder<T>) -> Unit
-        ) = create(block).apply { normalize(over) }
+        ) = create(block)
+            .apply { normalize(over) }
 
     }
 

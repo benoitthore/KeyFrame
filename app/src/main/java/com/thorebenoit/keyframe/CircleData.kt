@@ -9,7 +9,7 @@ class CircleData(
     val radius: MutableList<FrameProperty<Float>> = mutableListOf(),
     val color: MutableList<FrameProperty<Int>> = mutableListOf()
 ) : Normalizable {
-    override val propertyList: List<List<FrameProperty<*>>> = mutableListOf(
+    override val propertyList: List<MutableList<out FrameProperty<out Any>>> = listOf(
         x,
         y,
         radius,
