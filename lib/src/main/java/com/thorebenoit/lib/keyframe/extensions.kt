@@ -38,7 +38,7 @@ fun <T> MutableList<FrameProperty<T>>.animate(fraction: Number, animator: Proper
     if (ratio < first.position) {
         return first.data
     }
-    // Animation over ? Go to last postion
+    // Animation over ? Go to last position
     val last = last()
     if (ratio > last.position) {
         return last.data
