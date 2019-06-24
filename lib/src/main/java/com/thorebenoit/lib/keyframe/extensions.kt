@@ -66,12 +66,7 @@ fun <T> MutableList<FrameProperty<T>>.animate(fraction: Number, animator: Proper
     val to = next
 
     val fraction = Scale.map(fraction, from.position, to.position, 0, 1)
-    return animator.compute(
-        fraction,
-        fromValue = from.data,
-        toValue = to.data,
-        interpolator = to.interpolator
-    )
+    return animator(fraction, from.data, to.data, to.interpolator)
 }
 
 //val ε = 0.00001f // Epsilon
@@ -80,19 +75,4 @@ data class FrameProperty<T>(
     var position: Float,
     var data: T,
     var interpolator: Interpolator
-) {
-    fun toMutable() = FrameProperty(position, data, interpolator)
-    fun toImmutable() =
-        ImmutableFrameProperty(position, data, interpolator)
-}
-
-data class ImmutableFrameProperty<T>(
-    val position: Float,
-    val data: T,
-    val interpolator: Interpolator
-) {
-    fun toMutable() = FrameProperty(position, data, interpolator)
-    fun toImmutable() =
-        ImmutableFrameProperty(position, data, interpolator)
-}
-
+)

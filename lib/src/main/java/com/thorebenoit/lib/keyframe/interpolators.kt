@@ -5,7 +5,7 @@ import com.thorebenoit.lib.keyframe.utils.f
 import com.thorebenoit.lib.keyframe.utils.œ
 
 
-typealias Interpolator = (Float) -> Float
+internal typealias Interpolator = (Float) -> Float
 
 // equals 0 then equals 1 at the end
 val endInterpolator: Interpolator = { if (it > 1f - œ) 1f else 0f }
