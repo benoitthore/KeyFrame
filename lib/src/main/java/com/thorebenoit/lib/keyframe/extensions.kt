@@ -66,7 +66,7 @@ fun <T> MutableList<FrameProperty<T>>.animate(fraction: Number, animator: Proper
     val to = next
 
     val fraction = Scale.map(fraction, from.position, to.position, 0, 1)
-    return animator(fraction, from.data, to.data, to.interpolator)
+    return animator(to.interpolator(fraction), from.data, to.data)
 }
 
 //val ε = 0.00001f // Epsilon
