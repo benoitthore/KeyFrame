@@ -3,6 +3,8 @@
 - README introduction
 - TODO extensions.kt:33
 
+**UPDATE DOC TO REFLECT THE `Normalizable` CHANGES**
+
 # Get started
 TODO Add boiler plate code here
 
