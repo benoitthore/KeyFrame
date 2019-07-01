@@ -1,12 +1,11 @@
-package com.thorebenoit.lib.keyframe
+package com.thorebenoit.lib.keyframe.frame
 
-import com.thorebenoit.lib.keyframe.utils.œ
+import com.thorebenoit.lib.keyframe.*
+import com.thorebenoit.lib.keyframe.Interpolator
 
 
 class FrameAnimationBuilder<T : Normalizable>(val data: T) {
 
-    var defaultInterpolator: Interpolator =
-        linearInterpolator
 
     companion object {
         inline fun <reified T : Normalizable> create(crossinline block: T.(FrameAnimationBuilder<T>) -> Unit) =
@@ -24,24 +23,19 @@ class FrameAnimationBuilder<T : Normalizable>(val data: T) {
 
     }
 
-    var nextPosition: Float = 0f
+    var defaultInterpolator: Interpolator = linearInterpolator
+    private var nextPosition: Float = 0f
+
 
     inline fun build(block: T.(FrameAnimationBuilder<T>) -> Unit): T {
         data.block(this)
         return data
     }
 
-    // TODO Should this be removed ?
-//    fun initialFrame(block: FrameBuilder.() -> Unit) {
-//        val frameBuilder = FrameBuilder(-œ)
-//        frameBuilder.block()
-//        frameBuilder.build()
-//    }
-
-    inline fun frameWithDelay(delay: Number, crossinline block: FrameBuilder.() -> Unit)//
+    fun frameWithDelay(delay: Number, block: FrameBuilder.() -> Unit)//
             = frame(nextPosition + delay.toFloat(), block)
 
-    inline fun frame(position: Number? = null, block: FrameBuilder.() -> Unit) {
+    fun frame(position: Number? = null, block: FrameBuilder.() -> Unit) {
         val position = position?.toFloat() ?: nextPosition
 
         val frameBuilder = FrameBuilder(position)
@@ -60,7 +54,7 @@ class FrameAnimationBuilder<T : Normalizable>(val data: T) {
 
         fun build() {
             frameData.forEach {
-                it.addAtPosition(position)
+                it.addAt(position)
             }
         }
 
@@ -70,7 +64,6 @@ class FrameAnimationBuilder<T : Normalizable>(val data: T) {
             frame?.position?.let { lockSince(it) }
         }
 
-        // Don't let the user pick the frameIndex (he might be wrong)
         private fun <T> MutableList<FrameProperty<T>>.lockSince(frameIndex: Number) {
             val frameIndex = frameIndex.toFloat()
             forEach {
@@ -79,7 +72,7 @@ class FrameAnimationBuilder<T : Normalizable>(val data: T) {
                     return
                 }
             }
-            System.err.println("Impossible to find frame with index $frameIndex")
+            System.err.println("Cannot find frame with index $frameIndex")
         }
 
         infix fun <T> MutableList<FrameProperty<T>>.set(value: T) {
@@ -90,12 +83,7 @@ class FrameAnimationBuilder<T : Normalizable>(val data: T) {
             return AnimPropBuilder(value, this).apply { frameData.add(this) }
         }
 
-        infix fun <T> MutableList<FrameProperty<T>>.reaches(value: T) = this goto value
     }
-
-////////////////////////////
-////////////////////////////
-////////////////////////////
 
     inner class AnimPropBuilder<T>(val value: T, val targetList: MutableList<FrameProperty<T>>) {
 
@@ -118,7 +106,7 @@ class FrameAnimationBuilder<T : Normalizable>(val data: T) {
             return this
         }
 
-        fun addAtPosition(position: Float) {
+        internal fun addAt(position: Float) {
             targetList.add(
                 FrameProperty(
                     position,

@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.view.View
 import com.thorebenoit.lib.keyframe.*
+import com.thorebenoit.lib.keyframe.frame.FrameAnimationBuilder
 
 fun Context.valueAnimatorExampleView(): View {
 
