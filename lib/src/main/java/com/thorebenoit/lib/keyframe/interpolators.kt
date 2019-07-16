@@ -3,6 +3,7 @@ package com.thorebenoit.lib.keyframe
 import com.thorebenoit.lib.keyframe.utils.d
 import com.thorebenoit.lib.keyframe.utils.f
 import com.thorebenoit.lib.keyframe.utils.œ
+import kotlin.math.pow
 
 
 internal typealias Interpolator = (Float) -> Float
@@ -23,6 +24,12 @@ val bounceInterpolator: Interpolator = {
         t < 0.7408f -> bounce(t - 0.54719f) + 0.7f
         t < 0.9644f -> bounce(t - 0.8526f) + 0.9f
         else -> bounce(t - 1.0435f) + 0.95f
+    }
+}
+
+fun overshootInterpolator(tension: Number = 1f): Interpolator = tension.toFloat().let { T ->
+    { x ->
+        (T + 1) * (x - 1).pow(3) + T * (x - 1).pow(2) + 1
     }
 }
 
