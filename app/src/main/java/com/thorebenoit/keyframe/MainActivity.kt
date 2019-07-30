@@ -10,7 +10,8 @@ class MainActivity : AppCompatActivity() {
 
 
 //        setContentView(valueAnimatorExampleView())
-        setContentView(valueAnimatorNormalizedExampleView())
+//        setContentView(valueAnimatorNormalizedExampleView())
+        setContentView(graphView())
 
     }
 }

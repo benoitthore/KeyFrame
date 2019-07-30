@@ -5,9 +5,90 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Path
 import android.view.View
 import com.thorebenoit.lib.keyframe.*
 import com.thorebenoit.lib.keyframe.frame.FrameAnimationBuilder
+
+
+fun Context.graphView(): View {
+
+
+    val frame: ColorData = FrameAnimationBuilder.createNormalized {
+
+        it.apply {
+
+            frame {
+                red set 5.percent
+                green set 10.percent
+                blue set 15.percent
+            }
+
+//            frame {
+//                y goto 10.percent
+//            }
+
+            frame {
+                red goto 90.percent by EasingInterpolators.cubicInOut
+                blue goto 100.percent by bounceInterpolator
+            }
+
+//            frame {
+//                y goto 50.percent
+//            }
+        }
+    }
+
+    val precision = 100
+
+    val redPath = Path()
+    val greenPath = Path()
+    val bluePath = Path()
+    val paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        strokeWidth = 10f
+    }
+
+    return canvasView { canvas ->
+
+        canvas.drawColor(0xFF_bbbbbb.toInt())
+        redPath.reset()
+        greenPath.reset()
+        bluePath.reset()
+
+        (0..precision).map { it / 100f }.forEach { progress ->
+
+            val yRed = height - (frame.red.animate(progress) * height)
+            val yGreen = height - (frame.green.animate(progress) * height)
+            val yBlue = height - (frame.blue.animate(progress) * height)
+            val x = width * progress
+            if (progress == 0f) {
+                redPath.moveTo(x, yRed)
+                greenPath.moveTo(x, yGreen)
+                bluePath.moveTo(x, yBlue)
+
+            } else {
+                redPath.lineTo(x, yRed)
+                greenPath.lineTo(x, yGreen)
+                bluePath.lineTo(x, yBlue)
+
+            }
+
+            paint.color = Color.BLUE
+            canvas.drawPath(bluePath, paint)
+
+            paint.color = Color.GREEN
+            canvas.drawPath(greenPath, paint)
+
+            paint.color = Color.RED
+            canvas.drawPath(redPath, paint)
+
+        }
+    }
+
+
+}
 
 fun Context.valueAnimatorExampleView(): View {
 
@@ -44,7 +125,8 @@ fun Context.valueAnimatorExampleView(): View {
             frame {
                 x set 0f
             }
-            frameWithDelay(2) { // 2 frames after the previous one
+            frameWithDelay(2) {
+                // 2 frames after the previous one
                 x goto 100f
             }
         }

@@ -17,3 +17,13 @@ class CircleData(
     )
 
 }
+
+
+class ColorData(
+    val red: MutableList<FrameProperty<Float>> = mutableListOf(),
+    val green: MutableList<FrameProperty<Float>> = mutableListOf(),
+    val blue: MutableList<FrameProperty<Float>> = mutableListOf()
+) : Normalizable {
+    override val propertyList: List<MutableList<out FrameProperty<out Any>>> =
+        listOf(red, green, blue)
+}
