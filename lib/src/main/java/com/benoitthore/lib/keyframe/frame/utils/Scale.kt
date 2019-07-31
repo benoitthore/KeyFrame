@@ -1,8 +1,8 @@
-package com.thorebenoit.lib.keyframe.utils
+package com.benoitthore.lib.keyframe.frame.utils
 
-import com.thorebenoit.lib.keyframe.Interpolator
-import com.thorebenoit.lib.keyframe.linearInterpolator
-import com.thorebenoit.lib.keyframe.sinInterpolator
+import com.benoitthore.lib.keyframe.frame.Interpolator
+import com.benoitthore.lib.keyframe.frame.linearInterpolator
+import com.benoitthore.lib.keyframe.frame.sinInterpolator
 
 
 private typealias DomainRange = Pair<Number, Number>

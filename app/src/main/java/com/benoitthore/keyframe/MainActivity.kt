@@ -1,4 +1,4 @@
-package com.thorebenoit.keyframe
+package com.benoitthore.keyframe
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

@@ -1,7 +1,4 @@
-package com.thorebenoit.lib.keyframe.frame
-
-import com.thorebenoit.lib.keyframe.*
-import com.thorebenoit.lib.keyframe.Interpolator
+package com.benoitthore.lib.keyframe.frame
 
 
 class FrameAnimationBuilder<T : Normalizable>(val data: T) {
@@ -23,7 +20,8 @@ class FrameAnimationBuilder<T : Normalizable>(val data: T) {
 
     }
 
-    var defaultInterpolator: Interpolator = linearInterpolator
+    var defaultInterpolator: Interpolator =
+        linearInterpolator
     private var nextPosition: Float = 0f
 
 

@@ -1,8 +1,8 @@
-package com.thorebenoit.lib.keyframe
+package com.benoitthore.lib.keyframe.frame
 
-import com.thorebenoit.lib.keyframe.utils.d
-import com.thorebenoit.lib.keyframe.utils.f
-import com.thorebenoit.lib.keyframe.utils.œ
+import com.benoitthore.lib.keyframe.frame.utils.d
+import com.benoitthore.lib.keyframe.frame.utils.f
+import com.benoitthore.lib.keyframe.frame.utils.œ
 import kotlin.math.pow
 
 
@@ -37,10 +37,30 @@ infix fun Number.interpolateWith(interpolator: Interpolator) = interpolator(this
 
 // https://github.com/MasayukiSuda/EasingInterpolator/blob/master/ei/src/main/java/com/daasuu/ei/EasingProvider.java
 object EasingInterpolators {
-    val quadInOut: Interpolator = { getPowInOut(it, 2) }
-    val cubicInOut: Interpolator = { getPowInOut(it, 3) }
-    val quartInOut: Interpolator = { getPowInOut(it, 4) }
-    val quintInOut: Interpolator = { getPowInOut(it, 5) }
+    val quadInOut: Interpolator = {
+        getPowInOut(
+            it,
+            2
+        )
+    }
+    val cubicInOut: Interpolator = {
+        getPowInOut(
+            it,
+            3
+        )
+    }
+    val quartInOut: Interpolator = {
+        getPowInOut(
+            it,
+            4
+        )
+    }
+    val quintInOut: Interpolator = {
+        getPowInOut(
+            it,
+            5
+        )
+    }
     val sineInOut: Interpolator = { -0.5f * (Math.cos(Math.PI * it) - 1f).f }
     fun accelerate(pow: Number = 2.0): Interpolator = { Math.pow(it.toDouble(), pow.toDouble()).toFloat() }
     fun deccelerate(pow: Number = 2.0): Interpolator = { 1f - Math.pow(1.0 - it, pow.toDouble()).toFloat() }

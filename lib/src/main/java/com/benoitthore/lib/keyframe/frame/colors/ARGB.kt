@@ -1,6 +1,6 @@
-package com.thorebenoit.lib.keyframe.colors
+package com.benoitthore.lib.keyframe.frame.colors
 
-import com.thorebenoit.lib.keyframe.utils.constrain
+import com.benoitthore.lib.keyframe.frame.utils.constrain
 
 internal fun ARGB_evaluate(fraction: Float, startValue: Int, endValue: Int): Int {
     val startInt = startValue

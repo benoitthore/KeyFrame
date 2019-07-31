@@ -1,4 +1,4 @@
-package com.thorebenoit.keyframe
+package com.benoitthore.keyframe
 
 import android.content.Context
 import android.graphics.Canvas

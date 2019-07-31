@@ -1,7 +1,7 @@
-package com.thorebenoit.lib.keyframe
+package com.benoitthore.lib.keyframe.frame
 
-import com.thorebenoit.lib.keyframe.utils.Scale
-import com.thorebenoit.lib.keyframe.utils.f
+import com.benoitthore.lib.keyframe.frame.utils.Scale
+import com.benoitthore.lib.keyframe.frame.utils.f
 
 
 val Number.percent get() = toFloat() / 100f
@@ -20,9 +20,15 @@ fun <T> MutableList<FrameProperty<T>>.normalized(over: Number = 1f): MutableList
     }.toMutableList()
 }
 
-fun MutableList<FrameProperty<Float>>.animate(fraction: Number) = animate(fraction, FloatAnimator)
-fun MutableList<FrameProperty<Int>>.animate(fraction: Number) = animate(fraction, IntAnimator)
-fun MutableList<FrameProperty<Int>>.animateColor(fraction: Number) = animate(fraction, ColorAnimator)
+fun MutableList<FrameProperty<Float>>.animate(fraction: Number) = animate(fraction,
+    FloatAnimator
+)
+fun MutableList<FrameProperty<Int>>.animate(fraction: Number) = animate(fraction,
+    IntAnimator
+)
+fun MutableList<FrameProperty<Int>>.animateColor(fraction: Number) = animate(fraction,
+    ColorAnimator
+)
 
 fun <T> MutableList<FrameProperty<T>>.animate(fraction: Number, animator: PropertyInterpolator<T>): T {
     if (isEmpty()) {

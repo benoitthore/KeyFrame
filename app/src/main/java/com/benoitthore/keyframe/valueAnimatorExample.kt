@@ -1,4 +1,4 @@
-package com.thorebenoit.keyframe
+package com.benoitthore.keyframe
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -7,39 +7,39 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.view.View
-import com.thorebenoit.lib.keyframe.*
-import com.thorebenoit.lib.keyframe.frame.FrameAnimationBuilder
+import com.benoitthore.lib.keyframe.frame.*
 
 
 fun Context.graphView(): View {
 
+    val precision = 100
+
 
     val frame: ColorData = FrameAnimationBuilder.createNormalized {
-
         it.apply {
 
             frame {
-                red set 5.percent
-                green set 10.percent
-                blue set 15.percent
-            }
+                red set 0.percent
 
-//            frame {
-//                y goto 10.percent
-//            }
+                green set 25.percent
+                blue set -1f
+            }
 
             frame {
-                red goto 90.percent by EasingInterpolators.cubicInOut
-                blue goto 100.percent by bounceInterpolator
+                red goto 100.percent by EasingInterpolators.quadInOut
+                green lockSince last(green)
             }
 
-//            frame {
-//                y goto 50.percent
-//            }
+            frame {
+                red goto 50.percent by bounceInterpolator
+                green goto 90.percent
+            }
+
+
         }
     }
 
-    val precision = 100
+
 
     val redPath = Path()
     val greenPath = Path()
