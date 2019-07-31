@@ -114,11 +114,6 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.java.srcDirs
 }
 
-//task sourcesJar(type: Jar) {
-//    classifier = 'sources'
-//    from android.sourceSets.main.java.srcDirs
-//}
-
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
