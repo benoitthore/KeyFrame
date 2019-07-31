@@ -1,7 +1,7 @@
 package com.benoitthore.keyframe
 
-import com.benoitthore.lib.keyframe.frame.FrameProperty
-import com.benoitthore.lib.keyframe.frame.Normalizable
+import com.benoitthore.keyframe.core.FrameProperty
+import com.benoitthore.keyframe.core.Normalizable
 
 class CircleData(
     val x: MutableList<FrameProperty<Float>> = mutableListOf(),

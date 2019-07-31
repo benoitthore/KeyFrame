@@ -1,4 +1,4 @@
-package com.benoitthore.lib.keyframe.frame
+package com.benoitthore.keyframe.core
 
 
 interface Normalizable {

@@ -1,10 +1,10 @@
-package com.benoitthore.lib.keyframe.frame
+package com.benoitthore.keyframe.core
 
-import com.benoitthore.lib.keyframe.frame.colors.ARGB_evaluate
-import com.benoitthore.lib.keyframe.frame.utils.Scale
-import com.benoitthore.lib.keyframe.frame.utils.d
-import com.benoitthore.lib.keyframe.frame.utils.f
-import com.benoitthore.lib.keyframe.frame.utils.i
+import com.benoitthore.keyframe.core.colors.ARGB_evaluate
+import com.benoitthore.keyframe.core.utils.Scale
+import com.benoitthore.keyframe.core.utils.d
+import com.benoitthore.keyframe.core.utils.f
+import com.benoitthore.keyframe.core.utils.i
 
 typealias PropertyInterpolator<T> = (fraction: Number, fromValue: T, toValue: T) -> T
 

@@ -7,7 +7,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.view.View
-import com.benoitthore.lib.keyframe.frame.*
+import com.benoitthore.keyframe.core.*
 
 
 fun Context.graphView(): View {
@@ -26,12 +26,12 @@ fun Context.graphView(): View {
             }
 
             frame {
-                red goto 100.percent by EasingInterpolators.quadInOut
+                red goto 100.percent by com.benoitthore.keyframe.core.EasingInterpolators.quadInOut
                 green lockSince last(green)
             }
 
             frame {
-                red goto 50.percent by bounceInterpolator
+                red goto 50.percent by com.benoitthore.keyframe.core.bounceInterpolator
                 green goto 90.percent
             }
 
@@ -113,7 +113,7 @@ fun Context.valueAnimatorExampleView(): View {
 
             frame {
                 color goto Color.RED
-                y goto 500f by EasingInterpolators.quadInOut
+                y goto 500f by com.benoitthore.keyframe.core.EasingInterpolators.quadInOut
             }
 
 
@@ -194,7 +194,7 @@ fun Context.valueAnimatorNormalizedExampleView(): View {
 
             frame {
                 x goto 90.percent
-                radius goto 50f by bounceInterpolator
+                radius goto 50f by com.benoitthore.keyframe.core.bounceInterpolator
                 color goto Color.YELLOW
             }
 

@@ -1,4 +1,4 @@
-package com.benoitthore.lib.keyframe.frame.utils
+package com.benoitthore.keyframe.core.utils
 
 internal inline val Number.i get() = toInt()
 internal inline val Number.f get() = toFloat()

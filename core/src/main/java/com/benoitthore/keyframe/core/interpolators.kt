@@ -1,8 +1,8 @@
-package com.benoitthore.lib.keyframe.frame
+package com.benoitthore.keyframe.core
 
-import com.benoitthore.lib.keyframe.frame.utils.d
-import com.benoitthore.lib.keyframe.frame.utils.f
-import com.benoitthore.lib.keyframe.frame.utils.œ
+import com.benoitthore.keyframe.core.utils.d
+import com.benoitthore.keyframe.core.utils.f
+import com.benoitthore.keyframe.core.utils.œ
 import kotlin.math.pow
 import kotlin.math.sin
 

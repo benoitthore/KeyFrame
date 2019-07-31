@@ -21,7 +21,7 @@ ext {
     libraryName = 'KotlinKeyframe'
     artifact = 'core'
 
-    libraryDescription = 'Kotlin DSL to build Keyframe animation'
+    libraryDescription = 'Kotlin DSL to build Keyframe animations'
 
     siteUrl = 'https://github.com/benoitthore/Keyframe'
     gitUrl = 'https://github.com/benoitthore/Keyframe'

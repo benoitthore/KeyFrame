@@ -1,7 +1,7 @@
-package com.benoitthore.lib.keyframe.frame
+package com.benoitthore.keyframe.core
 
-import com.benoitthore.lib.keyframe.frame.utils.Scale
-import com.benoitthore.lib.keyframe.frame.utils.f
+import com.benoitthore.keyframe.core.utils.Scale
+import com.benoitthore.keyframe.core.utils.f
 
 
 val Number.percent get() = toFloat() / 100f

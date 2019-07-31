@@ -1,6 +1,6 @@
-package com.benoitthore.lib.keyframe.frame.colors
+package com.benoitthore.keyframe.core.colors
 
-import com.benoitthore.lib.keyframe.frame.utils.constrain
+import com.benoitthore.keyframe.core.utils.constrain
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
