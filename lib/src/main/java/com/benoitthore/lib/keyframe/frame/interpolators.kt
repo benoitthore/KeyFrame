@@ -4,14 +4,14 @@ import com.benoitthore.lib.keyframe.frame.utils.d
 import com.benoitthore.lib.keyframe.frame.utils.f
 import com.benoitthore.lib.keyframe.frame.utils.œ
 import kotlin.math.pow
+import kotlin.math.sin
 
 
 internal typealias Interpolator = (Float) -> Float
 
-// equals 0 then equals 1 at the end
 val endInterpolator: Interpolator = { if (it > 1f - œ) 1f else 0f }
 val linearInterpolator: Interpolator = { it }
-val sinInterpolator: Interpolator = { ((Math.sin((it - 0.5) * Math.PI) * 0.5 + 0.5)).f }
+val sinInterpolator: Interpolator = { ((sin((it - 0.5) * Math.PI) * 0.5 + 0.5)).f }
 val bounceInterpolator: Interpolator = {
 
     fun bounce(t: Float): Float {
@@ -35,7 +35,6 @@ fun overshootInterpolator(tension: Number = 1f): Interpolator = tension.toFloat(
 
 infix fun Number.interpolateWith(interpolator: Interpolator) = interpolator(this.f)
 
-// https://github.com/MasayukiSuda/EasingInterpolator/blob/master/ei/src/main/java/com/daasuu/ei/EasingProvider.java
 object EasingInterpolators {
     val quadInOut: Interpolator = {
         getPowInOut(

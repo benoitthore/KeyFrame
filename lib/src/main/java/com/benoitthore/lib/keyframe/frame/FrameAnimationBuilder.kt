@@ -85,17 +85,6 @@ class FrameAnimationBuilder<T : Normalizable>(val data: T) {
 
     inner class AnimPropBuilder<T>(val value: T, val targetList: MutableList<FrameProperty<T>>) {
 
-        // TODO -> Don't use default interpolator
-        /*
-        If set to null, the interpolator should take the next available one when animating
-        Only when animating, if no interpolator specified : Use linearInterpolator
-
-
-        The goal is to be able to interpolate a field over several frame
-
-        Currently the framework can only do 1 interpolation for 2 fields,
-            it needs to be able to do it for x fields
-         */
         var interpolator: Interpolator = defaultInterpolator
             private set
 

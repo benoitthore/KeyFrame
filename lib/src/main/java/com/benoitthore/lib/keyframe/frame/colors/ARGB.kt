@@ -1,6 +1,8 @@
 package com.benoitthore.lib.keyframe.frame.colors
 
 import com.benoitthore.lib.keyframe.frame.utils.constrain
+import kotlin.math.pow
+import kotlin.math.roundToInt
 
 internal fun ARGB_evaluate(fraction: Float, startValue: Int, endValue: Int): Int {
     val startInt = startValue
@@ -32,11 +34,11 @@ internal fun ARGB_evaluate(fraction: Float, startValue: Int, endValue: Int): Int
 
     // convert back to sRGB in the [0..255] range
     a *= 255.0f
-    r = Math.pow(r.toDouble(), 1.0 / 2.2).toFloat() * 255.0f
-    g = Math.pow(g.toDouble(), 1.0 / 2.2).toFloat() * 255.0f
-    b = Math.pow(b.toDouble(), 1.0 / 2.2).toFloat() * 255.0f
+    r = r.toDouble().pow(1.0 / 2.2).toFloat() * 255.0f
+    g = g.toDouble().pow(1.0 / 2.2).toFloat() * 255.0f
+    b = b.toDouble().pow(1.0 / 2.2).toFloat() * 255.0f
 
-    return Math.round(a) shl 24 or (Math.round(r) shl 16) or (Math.round(g) shl 8) or Math.round(b)
+    return a.roundToInt() shl 24 or (r.roundToInt() shl 16) or (g.roundToInt() shl 8) or b.roundToInt()
 }
 
 class ColorScale(val colors: List<Int>) {

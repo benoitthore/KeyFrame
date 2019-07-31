@@ -12,8 +12,6 @@ fun Normalizable.normalize(over: Float = 1f) {
         ?.maxBy { it.position }?.position ?: return
 
     propertyList.forEach { property: List<FrameProperty<*>> ->
-        // it = x, y , alpha
-
         property.forEach {
             val newPosition = over * it.position / max
             it.position = newPosition
