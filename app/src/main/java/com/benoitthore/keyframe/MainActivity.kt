@@ -9,9 +9,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
+//        setContentView(graphView())
 //        setContentView(valueAnimatorExampleView())
 //        setContentView(valueAnimatorNormalizedExampleView())
-        setContentView(graphView())
+        setContentView(randomFrameExampleView())
 
     }
 }

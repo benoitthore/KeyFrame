@@ -2,12 +2,14 @@ package com.benoitthore.keyframe
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.view.View
 import com.benoitthore.keyframe.core.*
+import java.util.concurrent.ThreadLocalRandom
 
 
 fun Context.graphView(): View {
@@ -31,14 +33,13 @@ fun Context.graphView(): View {
             }
 
             frame {
-                red goto 50.percent by com.benoitthore.keyframe.core.bounceInterpolator
+                red goto 50.percent by bounceInterpolator
                 green goto 90.percent
             }
 
 
         }
     }
-
 
 
     val redPath = Path()
@@ -194,7 +195,7 @@ fun Context.valueAnimatorNormalizedExampleView(): View {
 
             frame {
                 x goto 90.percent
-                radius goto 50f by com.benoitthore.keyframe.core.bounceInterpolator
+                radius goto 50f by bounceInterpolator
                 color goto Color.YELLOW
             }
 
@@ -227,6 +228,94 @@ fun Context.valueAnimatorNormalizedExampleView(): View {
         if (!animator.isStarted) {
             animator.start()
         }
+        val animationProgress = animator.animatedValue as Float
+
+
+        canvas.drawFrame(frame, animationProgress)
+
+        invalidate()
+    }
+}
+
+
+inline val Number.f get() = toFloat()
+inline val Number.dp get() = Resources.getSystem().displayMetrics.density * toFloat()
+private fun random(min: Number, max: Number) = random(min.toDouble(), max.toDouble())
+private fun random(min: Double, max: Double) = min + (Math.random() * ((max - min)))
+
+fun Context.randomFrameExampleView(): View {
+
+    val colors = listOf(
+        Color.BLACK,
+        Color.DKGRAY,
+        Color.GRAY,
+        Color.RED,
+        Color.GREEN,
+        Color.BLUE,
+        Color.YELLOW,
+        Color.CYAN,
+        Color.MAGENTA
+    )
+
+    val numberOfFrames = 10
+    val maxRadius = 50.dp
+    val minRadius = 10.dp
+
+    // Keyframes definition
+    val frame: CircleData = FrameAnimationBuilder.createNormalized {
+
+        // Dont forget this
+        it.apply {
+
+            frame {
+                x set random(0, 1).f
+                radius set random(minRadius, maxRadius).f
+                y set random(0, 1).f
+                color set colors.random()
+            }
+
+
+            (0 until numberOfFrames - 1).forEach { _ ->
+                frame {
+                    x goto random(0, 1).f
+                    radius goto random(minRadius, maxRadius).f
+                    y goto random(0, 1).f
+                    color goto colors.random()
+                }
+            }
+
+
+        }
+    }
+
+    val animator = ValueAnimator.ofFloat(0f, 1f) // Over 1 because it's normalized over 1
+        .apply {
+            duration = numberOfFrames * 1000L
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.RESTART
+        }
+
+    val paint = Paint()
+
+    fun Canvas.drawFrame(frame: CircleData, animationProgress: Float) {
+
+        // multiply by Canvas size because using .percent
+        val x = frame.x.animate(animationProgress) * width
+        val y = frame.y.animate(animationProgress) * height
+
+        val radius = frame.radius.animate(animationProgress)
+        val color = frame.color.animateColor(animationProgress)
+
+        paint.color = color
+        drawCircle(x, y, radius, paint)
+    }
+
+    return canvasView { canvas ->
+        if (!animator.isStarted) {
+            animator.start()
+        }
+
+        canvas.drawColor(Color.LTGRAY)
         val animationProgress = animator.animatedValue as Float
 
 
