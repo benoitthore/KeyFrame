@@ -1,5 +1,6 @@
 package com.benoitthore.keyframe
 
+import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.Resources
@@ -246,9 +247,6 @@ private fun random(min: Double, max: Double) = min + (Math.random() * ((max - mi
 fun Context.randomFrameExampleView(): View {
 
     val colors = listOf(
-        Color.BLACK,
-        Color.DKGRAY,
-        Color.GRAY,
         Color.RED,
         Color.GREEN,
         Color.BLUE,
@@ -261,8 +259,7 @@ fun Context.randomFrameExampleView(): View {
     val maxRadius = 50.dp
     val minRadius = 10.dp
 
-    // Keyframes definition
-    val frame: CircleData = FrameAnimationBuilder.createNormalized {
+    fun createFrameData(): CircleData = FrameAnimationBuilder.createNormalized {
 
         // Dont forget this
         it.apply {
@@ -288,11 +285,31 @@ fun Context.randomFrameExampleView(): View {
         }
     }
 
+    var frame: CircleData = createFrameData()
+
     val animator = ValueAnimator.ofFloat(0f, 1f) // Over 1 because it's normalized over 1
         .apply {
             duration = numberOfFrames * 1000L
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.RESTART
+            addListener(object : Animator.AnimatorListener {
+                override fun onAnimationRepeat(animation: Animator?) {
+                    frame = createFrameData()
+                }
+
+                override fun onAnimationEnd(animation: Animator?) {
+
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {
+
+                }
+
+                override fun onAnimationStart(animation: Animator?) {
+
+                }
+
+            })
         }
 
     val paint = Paint()
@@ -306,7 +323,6 @@ fun Context.randomFrameExampleView(): View {
         val radius = frame.radius.animate(animationProgress)
         val color = frame.color.animateColor(animationProgress)
 
-        paint.color = color
         drawCircle(x, y, radius, paint)
     }
 
