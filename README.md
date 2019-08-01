@@ -1,5 +1,8 @@
 [ ![Download](https://api.bintray.com/packages/benoitthore/KotlinKeyframe/core/images/download.svg?version=0.1.0) ](https://bintray.com/benoitthore/KotlinKeyframe/core/0.1.0/link)
 
+# Install
+```implementation 'com.benoitthore.keyframe:core:0.1.0'```
+
 # TODOs
 - Create Android lib module + add doc to it
 - README introduction
