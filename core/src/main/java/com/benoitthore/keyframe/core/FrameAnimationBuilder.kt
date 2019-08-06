@@ -9,7 +9,7 @@ class FrameAnimationBuilder<T : Normalizable>(val data: T) {
             FrameAnimationBuilder<T>(T::class.java.newInstance())
                 .build(block)
                 .apply {
-                    propertyList.forEach { it.sortBy { it.position } }
+                    propertyList.forEach { property -> property.sortBy { it.position } }
                 }
 
         inline fun <reified T : Normalizable> createNormalized(
