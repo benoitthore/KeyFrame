@@ -1,16 +1,13 @@
 # Documentation
 
-## Introduction
-TODO
-
-
 ## Building
 
 ### Define your model
-In order to use this library you first need to define the class where the data will be held, following these constraints:
+First thing you need to do is define the class where the data will be held, following these constraints:
 
 - Each property that you want to animate needs to be of type MutableList<FrameProperty<T>>
-- The class itself **MUST HAVE AN EMPTY CONSTRUCTOR**
+- The model class **MUST HAVE AN EMPTY CONSTRUCTOR**
+- The model class must override Normalizable
 
 ```kotlin
 class CircleData(
@@ -18,11 +15,18 @@ class CircleData(
     val y: MutableList<FrameProperty<Float>> = mutableListOf(),
     val radius: MutableList<FrameProperty<Float>> = mutableListOf(),
     val color: MutableList<FrameProperty<Int>> = mutableListOf()
-) 
+) : Normalizable {
+    override val propertyList: List<List<FrameProperty<*>>> = mutableListOf(
+        x,
+        y,
+        radius,
+        color
+    )
+}
 ```
 
 ### Building the frames
-In order to use the library, you need to call `FrameAnimationBuilder.createNormalized<T>` where `T` is the class we've just defined
+In order to use the library, you need to call `FrameAnimationBuilder.create<T>` or `FrameAnimationBuilder.createNormalized<T>` where `T` is the class we've just defined.
 
 In order to make the DSL easier to use, everything should be in a `it.apply` block, this is a workaround to get a double scope in Kotlin. So here's everything we need to get started:
 
@@ -35,11 +39,11 @@ FrameAnimationBuilder.createNormalized<CircleData> {
 }
 ```
 
-From now on the DSL is setup so we can start setting up keyframes. Each frame should be defined in a `frame { ... }` or `frameWithDelay { ... }` block.
+From now on, the DSL is setup so we can start setting up keyframes. Each frame should be defined in a `frame { ... }` or `frameWithDelay { ... }` block.
 
-The **first block** must be using `frame` and calling the `set` infix function in order to setup the initial values
+The **first frame** must call the `set` infix function in order to setup the initial values
 
-Then, if order to animate the value, the next `frame` block needs to use `goto` in order to express the fact that the value should be animated
+The next `frame`s block need to use `goto`, this keywords means the value should be animated
 
 ```
     frame {
@@ -49,9 +53,13 @@ Then, if order to animate the value, the next `frame` block needs to use `goto` 
     frame {
         x goto 500f
     }
+    
+    frame {
+        x goto 600f
+    }
 ``` 
 
-# Interpolator
+# Interpolators
 By default, the animation will use a LinearInterpolator, but each property can use a different interpolator on each frame:
 ```
     frame {
@@ -67,6 +75,8 @@ By default, the animation will use a LinearInterpolator, but each property can u
         radius goto 50f by bounceInterpolator
    }
 ``` 
+
+Because this is a Kotlin library, it comes with its own interpolators but `android.animation.Interpolator` can be used if you import the following function from the android module `com.benoitthore.keyframe.android.by`
 
 # More control
 ### Locking
@@ -111,25 +121,8 @@ If some delay is required between the frames, you can call `frameWithDelay` inst
 
 
 ### Normalizing (Optional)
-This is an optional but recommended step. When the `frame` function is called, the position of the frame is by default the last frame position +1. Howver it's often useful to work with values between 0 and 1, the normalize feature of the library will do this for you if you follow the following steps: 
-
-In order to use the `normalize()` feature, your class needs to implement the `Normalizable` interface.
-You only need to override 1 val which represents the list of properties to be animated, like so:
-```kotlin
-class CircleData(
-    val x: MutableList<FrameProperty<Float>> = mutableListOf(),
-    val y: MutableList<FrameProperty<Float>> = mutableListOf(),
-    val radius: MutableList<FrameProperty<Float>> = mutableListOf(),
-    val color: MutableList<FrameProperty<Int>> = mutableListOf()
-) : Normalizable {
-    override val propertyList: List<List<FrameProperty<*>>> = mutableListOf(
-        x,
-        y,
-        radius,
-        color
-    )
-}
-```
+ 
+This is an optional but recommended step. When the `frame` function is called, the position of the frame is by default the last frame position +1. Howver it's often useful to work with values between 0 and 1, the normalize feature of the library will do this for you.
  
 Once your model is built you can call the `normalize()` extension function on it. Alternatively you can call directly `FrameAnimationBuilder.createNormalized { ... }`
 By default it will be normalized over 1, which means the first frame is at position 0 and the last one is at position 1
