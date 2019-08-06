@@ -10,7 +10,6 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.view.View
 import com.benoitthore.keyframe.core.*
-import java.util.concurrent.ThreadLocalRandom
 
 
 fun Context.graphView(): View {
@@ -285,7 +284,7 @@ fun Context.randomFrameExampleView(): View {
         }
     }
 
-    var frame: CircleData = createFrameData()
+    var circleData: CircleData = createFrameData()
 
     val animator = ValueAnimator.ofFloat(0f, 1f) // Over 1 because it's normalized over 1
         .apply {
@@ -294,7 +293,7 @@ fun Context.randomFrameExampleView(): View {
             repeatMode = ValueAnimator.RESTART
             addListener(object : Animator.AnimatorListener {
                 override fun onAnimationRepeat(animation: Animator?) {
-                    frame = createFrameData()
+                    circleData = createFrameData()
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
@@ -312,19 +311,6 @@ fun Context.randomFrameExampleView(): View {
             })
         }
 
-    val paint = Paint()
-
-    fun Canvas.drawFrame(frame: CircleData, animationProgress: Float) {
-
-        // multiply by Canvas size because using .percent
-        val x = frame.x.animate(animationProgress) * width
-        val y = frame.y.animate(animationProgress) * height
-
-        val radius = frame.radius.animate(animationProgress)
-        val color = frame.color.animateColor(animationProgress)
-
-        drawCircle(x, y, radius, paint)
-    }
 
     return canvasView { canvas ->
         if (!animator.isStarted) {
@@ -335,10 +321,23 @@ fun Context.randomFrameExampleView(): View {
         val animationProgress = animator.animatedValue as Float
 
 
-        canvas.drawFrame(frame, animationProgress)
+        canvas.drawFrame(circleData, animationProgress)
 
         invalidate()
     }
 }
 
+val paint = Paint()
 
+fun Canvas.drawFrame(circleData: CircleData, animationProgress: Float) {
+
+    // multiply by Canvas size because using .percent
+    val x = circleData.x.animate(animationProgress) * width
+    val y = circleData.y.animate(animationProgress) * height
+
+    val radius = circleData.radius.animate(animationProgress)
+    val color = circleData.color.animateColor(animationProgress)
+
+    paint.color = color
+    drawCircle(x, y, radius, paint)
+}
