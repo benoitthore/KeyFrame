@@ -9,6 +9,8 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.view.View
+import android.view.animation.BounceInterpolator
+import com.benoitthore.keyframe.android.by
 import com.benoitthore.keyframe.core.*
 
 
@@ -28,15 +30,14 @@ fun Context.graphView(): View {
             }
 
             frame {
-                red goto 100.percent by com.benoitthore.keyframe.core.EasingInterpolators.quadInOut
+                red goto 100.percent by EasingInterpolators.quadInOut
                 green lockSince last(green)
             }
 
             frame {
-                red goto 50.percent by bounceInterpolator
+                red goto 50.percent by BounceInterpolator()
                 green goto 90.percent
             }
-
 
         }
     }

@@ -86,7 +86,6 @@ class FrameAnimationBuilder<T : Normalizable>(val data: T) {
     inner class AnimPropBuilder<T>(val value: T, val targetList: MutableList<FrameProperty<T>>) {
 
         var interpolator: Interpolator = defaultInterpolator
-            private set
 
         infix fun by(interpolator: Interpolator): AnimPropBuilder<T> {
             this.interpolator = interpolator
