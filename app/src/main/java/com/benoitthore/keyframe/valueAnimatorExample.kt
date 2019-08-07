@@ -13,7 +13,7 @@ import android.view.animation.BounceInterpolator
 import com.benoitthore.keyframe.android.by
 import com.benoitthore.keyframe.core.*
 
-
+// TODO Cleanup this file
 fun Context.graphView(): View {
 
     val precision = 100
@@ -239,10 +239,6 @@ fun Context.valueAnimatorNormalizedExampleView(): View {
 }
 
 
-inline val Number.f get() = toFloat()
-inline val Number.dp get() = Resources.getSystem().displayMetrics.density * toFloat()
-private fun random(min: Number, max: Number) = random(min.toDouble(), max.toDouble())
-private fun random(min: Double, max: Double) = min + (Math.random() * ((max - min)))
 
 fun Context.randomFrameExampleView(): View {
 
