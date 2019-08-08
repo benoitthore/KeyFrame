@@ -3,6 +3,7 @@ package com.benoitthore.keyframe.core
 import com.benoitthore.keyframe.core.utils.d
 import com.benoitthore.keyframe.core.utils.f
 import com.benoitthore.keyframe.core.utils.œ
+import kotlin.math.cos
 import kotlin.math.pow
 import kotlin.math.sin
 
@@ -36,33 +37,13 @@ fun overshootInterpolator(tension: Number = 1f): Interpolator = tension.toFloat(
 infix fun Number.interpolateWith(interpolator: Interpolator) = interpolator(this.f)
 
 object EasingInterpolators {
-    val quadInOut: Interpolator = {
-        getPowInOut(
-            it,
-            2
-        )
-    }
-    val cubicInOut: Interpolator = {
-        getPowInOut(
-            it,
-            3
-        )
-    }
-    val quartInOut: Interpolator = {
-        getPowInOut(
-            it,
-            4
-        )
-    }
-    val quintInOut: Interpolator = {
-        getPowInOut(
-            it,
-            5
-        )
-    }
-    val sineInOut: Interpolator = { -0.5f * (Math.cos(Math.PI * it) - 1f).f }
-    fun accelerate(pow: Number = 2.0): Interpolator = { Math.pow(it.toDouble(), pow.toDouble()).toFloat() }
-    fun deccelerate(pow: Number = 2.0): Interpolator = { 1f - Math.pow(1.0 - it, pow.toDouble()).toFloat() }
+    val quadInOut: Interpolator = {getPowInOut(it,2) }
+    val cubicInOut: Interpolator = {getPowInOut(it,3) }
+    val quartInOut: Interpolator = {getPowInOut(it,4) }
+    val quintInOut: Interpolator = {getPowInOut(it,5) }
+    val sineInOut: Interpolator = { -0.5f * (cos(Math.PI * it) - 1f).f }
+    fun accelerate(pow: Number = 2.0): Interpolator = { it.toDouble().pow(pow.toDouble()).toFloat() }
+    fun deccelerate(pow: Number = 2.0): Interpolator = { 1f - (1.0 - it).pow(pow.toDouble()).toFloat() }
 }
 
 private fun getPowInOut(elapsedTimeRate: Float, pow: Number): Float {

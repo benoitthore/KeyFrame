@@ -8,12 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
-import com.benoitthore.keyframe.CircleData
-import com.benoitthore.keyframe.R
+import com.benoitthore.keyframe.*
 import com.benoitthore.keyframe.core.EasingInterpolators
 import com.benoitthore.keyframe.core.FrameAnimationBuilder
 import com.benoitthore.keyframe.core.percent
-import com.benoitthore.keyframe.dp
 import kotlinx.android.synthetic.main.seek_bar_example.*
 
 
@@ -22,9 +20,6 @@ class SeekBarExampleFragment : Fragment() {
     private val exampleData: CircleData =
         FrameAnimationBuilder.createNormalized<CircleData> {
             it.apply {
-
-//                defaultInterpolator = EasingInterpolators.cubicInOut
-
                 frame {
                     x set 0.percent
                     y set 0.percent
@@ -53,8 +48,6 @@ class SeekBarExampleFragment : Fragment() {
                     radius goto 10.dp
                     color goto Color.MAGENTA
                 }
-
-
             }
         }
 
@@ -64,33 +57,17 @@ class SeekBarExampleFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         button.setOnClickListener {
-            ValueAnimator.ofFloat(0f, 1f).apply {
-
-                addUpdateListener {
-                    circle_data_view.progress = it.animatedFraction
-                    seekbar.progress = (it.animatedFraction * 100).toInt()
-                }
-                duration = 2000L
-                start()
+            doAnimation { progress ->
+                circle_data_view.progress = progress
+                seekbar.progress = (progress * 100).toInt()
             }
         }
 
         circle_data_view.data = exampleData
 
-
-        seekbar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                circle_data_view.progress = progress / 100f
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            }
-
-        })
+        seekbar.onSeekChange { progress ->
+            circle_data_view.progress = progress / 100f
+        }
     }
 }

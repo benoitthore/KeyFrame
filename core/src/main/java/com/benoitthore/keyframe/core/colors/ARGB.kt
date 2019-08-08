@@ -38,7 +38,11 @@ internal fun ARGB_evaluate(fraction: Float, startValue: Int, endValue: Int): Int
     g = g.toDouble().pow(1.0 / 2.2).toFloat() * 255.0f
     b = b.toDouble().pow(1.0 / 2.2).toFloat() * 255.0f
 
-    return a.roundToInt() shl 24 or (r.roundToInt() shl 16) or (g.roundToInt() shl 8) or b.roundToInt()
+    return try {
+        a.roundToInt() shl 24 or (r.roundToInt() shl 16) or (g.roundToInt() shl 8) or b.roundToInt()
+    } catch (e: Exception) {
+        throw e
+    }
 }
 
 class ColorScale(val colors: List<Int>) {

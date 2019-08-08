@@ -1,13 +1,9 @@
-package com.benoitthore.keyframe
+package com.benoitthore.keyframe.ui
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.benoitthore.keyframe.core.EasingInterpolators
-import com.benoitthore.keyframe.core.FrameAnimationBuilder
-import com.benoitthore.keyframe.core.percent
-import com.benoitthore.keyframe.examples.SeekBarExampleFragment
+import com.benoitthore.keyframe.R
 
 class MainActivity : AppCompatActivity() {
 

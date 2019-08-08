@@ -239,89 +239,89 @@ fun Context.valueAnimatorNormalizedExampleView(): View {
 }
 
 
-fun Context.randomFrameExampleView(): View {
-
-    val colors = listOf(
-        Color.RED,
-        Color.GREEN,
-        Color.BLUE,
-        Color.YELLOW,
-        Color.CYAN,
-        Color.MAGENTA
-    )
-
-
-    fun createFrameData(): CircleData = FrameAnimationBuilder.createNormalized {
-
-        val numberOfFrames = 10
-        val maxRadius = 50.dp
-        val minRadius = 10.dp
-        // Dont forget this
-        it.apply {
-
-            frame {
-                x set random(0, 1).f
-                radius set random(minRadius, maxRadius).f
-                y set random(0, 1).f
-                color set colors.random()
-            }
-
-
-            (0 until numberOfFrames - 1).forEach { _ ->
-                frame {
-                    x goto random(0, 1).f
-                    radius goto random(minRadius, maxRadius).f
-                    y goto random(0, 1).f
-                    color goto colors.random()
-                }
-            }
-
-
-        }
-    }
-
-    var circleData: CircleData = createFrameData()
-
-    val animator = ValueAnimator.ofFloat(0f, 1f) // Over 1 because it's normalized over 1
-        .apply {
-            duration = 5000L
-            repeatCount = ValueAnimator.INFINITE
-            repeatMode = ValueAnimator.RESTART
-            addListener(object : Animator.AnimatorListener {
-                override fun onAnimationRepeat(animation: Animator?) {
-                    circleData = createFrameData()
-                }
-
-                override fun onAnimationEnd(animation: Animator?) {
-
-                }
-
-                override fun onAnimationCancel(animation: Animator?) {
-
-                }
-
-                override fun onAnimationStart(animation: Animator?) {
-
-                }
-
-            })
-        }
-
-
-    return canvasView { canvas ->
-        if (!animator.isStarted) {
-            animator.start()
-        }
-
-        canvas.drawColor(Color.LTGRAY)
-        val animationProgress = animator.animatedValue as Float
-
-
-        canvas.drawFrame(circleData, animationProgress)
-
-        invalidate()
-    }
-}
+//fun Context.randomFrameExampleView(): View {
+//
+//    val colors = listOf(
+//        Color.RED,
+//        Color.GREEN,
+//        Color.BLUE,
+//        Color.YELLOW,
+//        Color.CYAN,
+//        Color.MAGENTA
+//    )
+//
+//
+//    fun createFrameData(): CircleData = FrameAnimationBuilder.createNormalized {
+//
+//        val numberOfFrames = 10
+//        val maxRadius = 50.dp
+//        val minRadius = 10.dp
+//        // Dont forget this
+//        it.apply {
+//
+//            frame {
+//                x set random(0, 1).f
+//                radius set random(minRadius, maxRadius).f
+//                y set random(0, 1).f
+//                color set colors.random()
+//            }
+//
+//
+//            (0 until numberOfFrames - 1).forEach { _ ->
+//                frame {
+//                    x goto random(0, 1).f
+//                    radius goto random(minRadius, maxRadius).f
+//                    y goto random(0, 1).f
+//                    color goto colors.random()
+//                }
+//            }
+//
+//
+//        }
+//    }
+//
+//    var circleData: CircleData = createFrameData()
+//
+//    val animator = ValueAnimator.ofFloat(0f, 1f) // Over 1 because it's normalized over 1
+//        .apply {
+//            duration = 5000L
+//            repeatCount = ValueAnimator.INFINITE
+//            repeatMode = ValueAnimator.RESTART
+//            addListener(object : Animator.AnimatorListener {
+//                override fun onAnimationRepeat(animation: Animator?) {
+//                    circleData = createFrameData()
+//                }
+//
+//                override fun onAnimationEnd(animation: Animator?) {
+//
+//                }
+//
+//                override fun onAnimationCancel(animation: Animator?) {
+//
+//                }
+//
+//                override fun onAnimationStart(animation: Animator?) {
+//
+//                }
+//
+//            })
+//        }
+//
+//
+//    return canvasView { canvas ->
+//        if (!animator.isStarted) {
+//            animator.start()
+//        }
+//
+//        canvas.drawColor(Color.LTGRAY)
+//        val animationProgress = animator.animatedValue as Float
+//
+//
+//        canvas.drawFrame(circleData, animationProgress)
+//
+//        invalidate()
+//    }
+//}
 
 val paint = Paint()
 
