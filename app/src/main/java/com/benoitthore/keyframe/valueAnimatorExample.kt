@@ -239,7 +239,6 @@ fun Context.valueAnimatorNormalizedExampleView(): View {
 }
 
 
-
 fun Context.randomFrameExampleView(): View {
 
     val colors = listOf(
@@ -251,12 +250,12 @@ fun Context.randomFrameExampleView(): View {
         Color.MAGENTA
     )
 
-    val numberOfFrames = 10
-    val maxRadius = 50.dp
-    val minRadius = 10.dp
 
     fun createFrameData(): CircleData = FrameAnimationBuilder.createNormalized {
 
+        val numberOfFrames = 10
+        val maxRadius = 50.dp
+        val minRadius = 10.dp
         // Dont forget this
         it.apply {
 
@@ -285,7 +284,7 @@ fun Context.randomFrameExampleView(): View {
 
     val animator = ValueAnimator.ofFloat(0f, 1f) // Over 1 because it's normalized over 1
         .apply {
-            duration = numberOfFrames * 1000L
+            duration = 5000L
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.RESTART
             addListener(object : Animator.AnimatorListener {
@@ -338,3 +337,4 @@ fun Canvas.drawFrame(circleData: CircleData, animationProgress: Float) {
     paint.color = color
     drawCircle(x, y, radius, paint)
 }
+
