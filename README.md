@@ -1,12 +1,12 @@
-[ ![Download](https://api.bintray.com/packages/benoitthore/KotlinKeyframe/core/images/download.svg?version=0.1.0) ](https://bintray.com/benoitthore/KotlinKeyframe/core/0.1.0/link)
+[ ![Download](https://api.bintray.com/packages/benoitthore/KotlinKeyframe/core/images/download.svg?version=1.0.0) ](https://bintray.com/benoitthore/KotlinKeyframe/core/1.0.0/link)
 
 # Introduction
 The purpose of this library is to provide an easy way of building keyframe-based animations with a simple an intuitive DSL.
 
 # Install
-Core: ```implementation 'com.benoitthore.keyframe:core:0.1.0'```
+Core: ```implementation 'com.benoitthore.keyframe:core:1.0.0'```
 
-Android: ```implementation 'com.benoitthore.keyframe:android:0.1.0'```
+Android: ```implementation 'com.benoitthore.keyframe:android:1.0.0'```
 
 # Get started
 
