@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.benoitthore.keyframe.R
 import com.benoitthore.keyframe.dp
+import com.benoitthore.keyframe.examples.GraphExampleFragment
 import com.benoitthore.keyframe.examples.RandomValuesFragment
 import com.benoitthore.keyframe.examples.SeekBarExampleFragment
 import kotlinx.android.synthetic.main.selector_fragment.*
@@ -24,10 +25,10 @@ class SelectorFragment : Fragment() {
 
         example_list.layoutManager = LinearLayoutManager(context!!)
         example_list.adapter = SelectorAdapter(
-
             listOf(
                 "Seekbar" to { SeekBarExampleFragment() },
-                "Random" to { RandomValuesFragment() }
+                "Random" to { RandomValuesFragment() },
+                "Graph" to { GraphExampleFragment() }
             )
         ) {
             (activity as MainActivity).addFragment(it())
