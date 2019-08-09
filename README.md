@@ -1,8 +1,7 @@
 [ ![Download](https://api.bintray.com/packages/benoitthore/KotlinKeyframe/core/images/download.svg?version=0.1.0) ](https://bintray.com/benoitthore/KotlinKeyframe/core/0.1.0/link)
 
 # Introduction
-TODO
-
+The purpose of this library is to provide an easy way of building keyframe-based animations with a simple an intuitive DSL.
 
 # Install
 Core: ```implementation 'com.benoitthore.keyframe:core:0.1.0'```
@@ -17,7 +16,7 @@ class CircleData(
     val x: MutableList<FrameProperty<Float>> = mutableListOf(),
     val y: MutableList<FrameProperty<Float>> = mutableListOf()
 ) : Normalizable {
-    override val propertyList: List<List<FrameProperty<*>>> = mutableListOf(x, y)
+    override val propertyList: List<MutableList<out FrameProperty<out Any>>> = listOf(x,y)
 }
 ```
 
