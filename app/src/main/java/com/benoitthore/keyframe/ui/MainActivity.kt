@@ -34,11 +34,3 @@ class MainActivity : AppCompatActivity() {
 
 
 }
-
-// TODO Examples:
-/**
- * - With value animator
- * - With progress bar
- * - With ScrollView/RecyclerView
- * - Advanced Canvas with createNormalized
- */
