@@ -75,7 +75,7 @@ class RandomValuesFragment : Fragment() {
 
             ValueAnimator.ofFloat(0f, 1f) // Over 1 because it's normalized over 1
                 .apply {
-                    duration = numberOfFrames/2 * 1000L
+                    duration = numberOfFrames * 2000L
                     repeatCount = ValueAnimator.INFINITE
                     repeatMode = ValueAnimator.RESTART
 

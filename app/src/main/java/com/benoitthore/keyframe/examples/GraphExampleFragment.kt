@@ -23,8 +23,11 @@ import kotlinx.android.synthetic.main.seek_bar_example.*
 class GraphExampleFragment : Fragment() {
 
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val precision = 100
 
 
@@ -33,7 +36,6 @@ class GraphExampleFragment : Fragment() {
 
                 frame {
                     red set 0.percent
-
                     green set 25.percent
                     blue set 25.percent
                 }

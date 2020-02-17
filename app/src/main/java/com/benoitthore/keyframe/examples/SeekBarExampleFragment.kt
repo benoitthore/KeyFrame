@@ -9,9 +9,7 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import com.benoitthore.keyframe.*
-import com.benoitthore.keyframe.core.EasingInterpolators
-import com.benoitthore.keyframe.core.FrameAnimationBuilder
-import com.benoitthore.keyframe.core.percent
+import com.benoitthore.keyframe.core.*
 import kotlinx.android.synthetic.main.seek_bar_example.*
 
 
@@ -19,9 +17,10 @@ class SeekBarExampleFragment : Fragment() {
 
     private val exampleData: CircleData =
         FrameAnimationBuilder.createNormalized<CircleData> {
+            val thisRef = this
+
             it.apply {
                 frame {
-                    x set 0.percent
                     y set 0.percent
                     radius set 20.dp
                     color set Color.RED
@@ -52,7 +51,11 @@ class SeekBarExampleFragment : Fragment() {
         }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.seek_bar_example, null)
     }
 

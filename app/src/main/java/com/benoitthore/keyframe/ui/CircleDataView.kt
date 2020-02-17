@@ -8,20 +8,30 @@ import android.view.View
 import com.benoitthore.keyframe.CircleData
 import com.benoitthore.keyframe.core.animate
 import com.benoitthore.keyframe.core.animateColor
+import com.benoitthore.keyframe.dp
 import kotlin.math.*
 
 class CircleDataView : View {
 
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
 
     init {
-        setOnClickListener {  }
+        setOnClickListener { }
     }
 
     private val paint = Paint()
+    var borderRadius = 2.dp
+
+    private val borderPaint = Paint().apply {
+        style = Paint.Style.FILL
+    }
 
     var progress = 0f
         set(value) {
@@ -47,6 +57,7 @@ class CircleDataView : View {
             val color = circleData.color.animateColor(progress)
 
             paint.color = color
+            canvas.drawCircle(x, y, radius + borderRadius, borderPaint)
             canvas.drawCircle(x, y, radius, paint)
         }
 

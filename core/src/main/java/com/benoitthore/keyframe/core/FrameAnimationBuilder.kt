@@ -81,6 +81,10 @@ class FrameAnimationBuilder<T : Normalizable>(val data: T) {
             return AnimPropBuilder(value, this).apply { frameData.add(this) }
         }
 
+        fun <T> goto(value: T,t : MutableList<FrameProperty<T>>): AnimPropBuilder<T> {
+            return AnimPropBuilder(value, t).apply { frameData.add(this) }
+        }
+
     }
 
     inner class AnimPropBuilder<T>(val value: T, val targetList: MutableList<FrameProperty<T>>) {
